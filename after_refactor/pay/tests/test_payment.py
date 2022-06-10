@@ -14,12 +14,12 @@ def card() -> CreditCard:
 
 class PaymentProcessorMock:
     def charge(self, card: CreditCard, amount: int) -> None:
-        print(f"Charging card {card.number} for {amount}.")
+        print(f"Charging card {card.number} for £{amount/100:.2f}.")
 
 
 def test_pay_order(card: CreditCard) -> None:
     order = Order()
-    order.line_items.append(LineItem(name="Shoes", price=100_00, quantity=2))
+    order.line_items.append(LineItem(name="Shoes", price=100, quantity=2))
     pay_order(order, PaymentProcessorMock(), card)
     assert order.status == OrderStatus.PAID
 
